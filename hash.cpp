@@ -1,20 +1,22 @@
 #include "hash.h"
 #include "cmath"
+Stock empty_stock("NULL","NULL", 0, 0); //empty stock 
 
-Hash::Hash(Stock empty_stock){
+Hash::Hash(){
     size = 10, pos = 0;
     list = new Stock[size];
-    for(int i = 0; i < size; i++) //place holder value for Stock
+    for(int i = 0; i < size; i++) //place holder value for table
         list[i] = empty_stock;
 }
 
-void Hash::copy_over(Stock empty_stock){
+void Hash::copy_over(){
     int copy = size;
     size = pos + 10;
     for(int i = copy; i < size; i++)
         list[i] = empty_stock; //increased list size
 }
 
+//*** WORK IN PROGRESS ***
 // int Hash::hashify(Stock stock){ 
 //     std::string buyer_name = stock.get_buyer_name();
 //     int last = '\0'; //empty last initial
@@ -30,17 +32,19 @@ void Hash::copy_over(Stock empty_stock){
 //     return loc;
 // }
 
-// void Hash::collision(int val){
-//     while(true){ //while position is not free
-//         pos++;
-//         if(pos == size)
-//             copy_over();
-//         if(list[pos] == 0 || list[pos] == -1) //ok to replace deleted elements
-//             break;
-//     }
-//     list[pos] = val;
-// }
+void Hash::collision(Stock stock){
+    
+    while(true){ //while position is not free
+        pos++;
+        if(pos == size)
+            copy_over();
+        if(list[pos] == empty_stock) 
+            break;
+    }
+    list[pos] = stock;
+}
 
+//*** WORK IN PROGRESS ***
 // void Hash::add(int val){
 //     pos = hashify(val);
 //     if (pos > size)

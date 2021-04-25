@@ -8,12 +8,14 @@ class Hash{
         Stock* list;
         int pos,size;
     public:
-        Hash(Stock empty_stock);
-        void copy_over(Stock empty_stock);
-        void add(Stock stock);
-        int hashify(Stock stock);
-        void collision(Stock stock);
-        void remove(Stock stock);
+        Hash();
+        void copy_over();
+        void add(Stock);
+        int hashify(Stock);
+        void collision(Stock);
+        void remove(Stock);
         friend std::ostream& operator << (std::ostream& output, Hash hash);
+        
+
 };
 #endif

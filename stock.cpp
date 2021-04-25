@@ -31,3 +31,10 @@ std::ostream& operator << (std::ostream& output, Stock stock){
     output<<stock.symbol<< " "<<stock.shares<<" $"<<stock.cost<<std::endl;
     return output;
 }
+
+bool operator == (Stock s1, Stock s2){
+    if(s1.buyer_name == s2.buyer_name && s1.symbol == s2.symbol && s1.cost == s2.cost && s1.shares == s2.shares)
+        return true;
+    return false;
+}
+

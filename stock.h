@@ -17,6 +17,7 @@ class Stock{
         int get_cost();
         
         friend std::ostream& operator << (std::ostream& output, Stock stock);
+        friend bool operator == (Stock s1, Stock s2);
 };
 
 #endif
