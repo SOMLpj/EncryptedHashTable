@@ -12,7 +12,7 @@ int main(){
     Stock s6("KING","AAWW",3,63, "avocado");
     Stock s7("PARKER","FBP",1,90, "security");
     Stock s8("WAYNE","AAA",2,633, "helloworld");
-    Stock s9("BBB","BBB",10,6, "potatoes");
+    Stock s9("Mason","BBB",10,6, "potatoes");
     Stock s10("JACKSON","CCC",65,623,"timex");
 
     Hash h;
