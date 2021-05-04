@@ -2,20 +2,34 @@
 #include "hash.h"
 
 int main(){
-    Stock place_holder("NULL","NULL", 0, 0);
-    Stock s0("AAA", "BBB",20, 300);
-    Stock s1("FINN","MSFT",22,180);
-    Stock s2("DRACULA","GOOGL",5,1800);
-    Stock s3("FRANKENSTEIN","CSCO",2,38);
-    Stock s4("SHACKLETON","JPM",9,97);
-    Stock s5("POTTER","BAC",12,24);
-    Stock s6("KING","AAWW",3,63);
-    Stock s7("PARKER","FBP",1,90);
-    Stock s8("WAYNE","AAA",2,633);
-    Stock s9("RUTH","BBB",10,6);
-    Stock s10("JACKSON","CCC",65,623);
+    Stock place_holder("NULL","NULL", 0, 0, "NULL");
+    Stock s0("HUCKLEBERRY", "APPL",20, 300, "apple");
+    Stock s1("FINN","MSFT",22,180,"orange");
+    Stock s2("DRACULA","GOOGL",5,1800,"peanut");
+    Stock s3("FRANKENSTEIN","CSCO",2,38,"cheese");
+    Stock s4("SHACKLETON","JPM",9,97,"onions");
+    Stock s5("POTTER","BAC",12,24,"syrup");
+    Stock s6("KING","AAWW",3,63, "avocado");
+    Stock s7("PARKER","FBP",1,90, "security");
+    Stock s8("WAYNE","AAA",2,633, "helloworld");
+    Stock s9("RUTH","BBB",10,6, "potatoes");
+    Stock s10("JACKSON","CCC",65,623,"timex");
+    Stock pass[20] = {s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,place_holder};
 
     Hash h;
-    int encrypter = h.encrypt(s3);
-    h.decrypt(encrypter);
+    h.add(s0);
+    // h.add(s1);
+    // h.add(s2);
+    // h.add(s3);
+    // h.add(s4);
+    // h.add(s5);
+    // h.add(s6);
+    // h.add(s7);
+    // h.add(s8);
+    // h.add(s9);
+    // h.add(s10);
+
+    std::cout<<h<<std::endl;
+    
+
 }

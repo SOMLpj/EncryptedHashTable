@@ -4,11 +4,13 @@ Stock::Stock(){
 
 }
 
-Stock::Stock(std::string buyer_name, std::string symbol, int shares, int cost){
+Stock::Stock(std::string buyer_name, std::string symbol, int shares, int cost, std::string password){
     this -> buyer_name = buyer_name; 
     this -> symbol = symbol; 
     this -> cost = cost;
     this -> shares = shares; 
+    this -> password = password; 
+
 }
 
 std::string Stock::get_buyer_name(){
@@ -26,6 +28,15 @@ int Stock::get_cost(){
 int Stock::get_shares(){
     return this -> shares;
 }
+
+void Stock::set_buyer_name(std::string s){
+    this -> buyer_name = s;
+}
+
+std::string Stock::get_password(){
+    return this -> password;
+}
+
 
 std::ostream& operator << (std::ostream& output, Stock stock){
     output<<stock.symbol<< " "<<stock.shares<<" $"<<stock.cost<<std::endl;
