@@ -44,7 +44,7 @@ std::ostream& operator << (std::ostream& output, Stock stock){
 }
 
 bool operator == (Stock s1, Stock s2){
-    if(s1.buyer_name == s2.buyer_name && s1.symbol == s2.symbol && s1.cost == s2.cost && s1.shares == s2.shares)
+    if(s1.get_buyer_name() == s2.get_buyer_name() && s1.get_symbol() == s2.get_symbol() && s1.get_cost() == s2.get_cost() && s1.get_shares() == s2.get_shares() && s1.get_password() == s2.get_password())
         return true;
     return false;
 }

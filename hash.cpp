@@ -9,7 +9,7 @@ Stock empty_stock("NULL","NULL", 0, 0, "NULL"); //empty stock
 std::vector <int> v;
 
 Hash::Hash(){
-    size = 10, pos = 0;
+    size = 30, pos = 0;
     list = new Stock[size];
     for(int i = 0; i < size; i++) //place holder value for table
         list[i] = empty_stock;
@@ -24,6 +24,7 @@ void Hash::copy_over(){
 
 
 void Hash::collision(Stock stock){ //WILL PROBABLY USE CHAINING (LINKED LISTS) TO HANLDE COLLISIONS
+    int e = encrypt(stock);
     
     while(true){ //while position is not free
         pos++;
@@ -33,72 +34,52 @@ void Hash::collision(Stock stock){ //WILL PROBABLY USE CHAINING (LINKED LISTS) T
             break;
     }
     list[pos] = stock;
+    std::string encrypted_name = std::to_string(e);
+    std::cout<<"Adding "<< stock.get_buyer_name()<<std::endl;
+    std::cout<<"Encrypting..."<<std::endl;
+    stock.set_buyer_name(encrypted_name);
+    std::cout<<"ADDED " << stock.get_buyer_name()<< " at index " << pos<< std::endl;
+
+    
 }
 
-void Hash::add(Stock& s){
+void Hash::add(Stock s){
     pos = hashify(s);
-    if (pos > size)
-        copy_over();
     if(list[pos].get_buyer_name() == "NULL"){ // if not occupied
         std::string encrypted_name = std::to_string(encrypt(s));
+        std::cout<<"Adding "<< s.get_buyer_name()<<std::endl;
+        std::cout<<"Encrypting..."<<std::endl;
         s.set_buyer_name(encrypted_name);
         list[pos] = s;
+        std::cout<<"ADDED " << s.get_buyer_name()<< " at index " << pos<< std::endl;
     }
-    else //if occupied --> collision
+    else{
+        std::cout<<"Collision detected."<<std::endl;
+        std::cout<<"Handling..."<<std::endl;
         collision(s);
+    } 
+    std::cout<<"\n\n";
 }
 
 int Hash::hashify(Stock stock){ 
     std::string input = stock.get_password();//"df;oaiwjef";
     std::string output1 = sha256(input);
-    std::cout<<output1<<std::endl;
-    char*str;
-    int num = 0;
-    int length = output1.length();
-    int j;
-
-    for (int i = 0; i < 3; i++ ){
-        j = get_rand(length);
-        std::cout << "INDEX " << j << " VALUE ";
-        str[i] = output1[j];
-        std::cout << str[i] << std::endl;
-        num += str[i];
+    int index = 0, temp;
+    char c;
+    for(int i = 0; i  < 5; i++){ 
+       if(isdigit(output1[i])){
+           index+= (output1[i] - '0');
+           continue;
+       }
+       c = toupper(output1[i]);
+       temp = letter_to_num(c);
+       index+=temp;
     }
-    return num;
+    return index;
 }
-
-int Hash::get_rand(int x){
-    int temp = x;
-    while(temp--){
-        x = rand() % x + 0;
-    }
-    return x;
-}
-
-// void Hash::remove(int val){
-//     pos = hashify(val);
-//     if(list [pos] == val){
-//         std::cout<<"Element removed: "<< val<<std::endl;
-//         list[pos] = -1; //removed
-//     }
-//     else{
-//         while(true){
-//             pos++;
-//             if(size < pos){
-//                 std::cout<<"Could not find element: "<< val<< std::endl; 
-//                 break;
-//             }
-//             if(list[pos] == val){
-//                 std::cout<<"Element removed: "<< val<<std::endl;
-//                 list[pos] = -1;
-//                 break;
-//             }
-//         }
-//     }
-// }
 
 long long Hash::letter_to_num(char c){
-    switch(c){
+    switch(toupper(c)){
         case 'A':
         return 1;
         case 'B':
@@ -213,37 +194,40 @@ char Hash::num_to_letter(int val){
     return ' ';
 }
 
-int Hash::encrypt(Stock& s){
+int Hash::encrypt(Stock s){
     std::string name = s.get_buyer_name();
     int name_val = 0;
+    int private_key = s.get_password().length();
+    v.push_back(private_key);
     for(int i = 0; i < name.length(); i++){
-        int temp = letter_to_num(name[i]);
+        int temp = letter_to_num(name[i]) + private_key;
         v.push_back(temp);
         if(temp / 10 == 0)
             name_val*=10;
         else    
             name_val*=100;
-        name_val += letter_to_num(name[i]);
+        name_val += temp;
     }
-    std::cout<<"Encrypted name: " <<name_val<<std::endl;
     return std::abs(name_val);
+    
 }
 
 std::string Hash::decrypt(int val){
     Stock s;
+    int private_key = v[0];
     std::string num = std::to_string(val);
     std::string result;
     for(int i = 0; i < v.size(); i++){
-        char c = num_to_letter(v[i]);
+        char c = num_to_letter(v[i] - private_key) ;
         result += c;
     }
-    std::cout<<"Decrypted name: " << result<<std::endl;
+    std::cout<<val<< " --> " << result<<"\n\n";
     return result;
 }
 
 std::ostream& operator << (std::ostream& output, Hash hash){
     for(int i = 0; i < hash.size; i++)
-        output<<hash.list[i].get_buyer_name()<< " " << hash.list[i].get_symbol()<< " " << hash.list[i].get_shares()<< " " << hash.list[i].get_cost()<<std::endl;
+        output<<"i: " <<i<< " "<< hash.list[i].get_buyer_name()<< " " << hash.list[i].get_symbol()<< " " << hash.list[i].get_shares()<< " " << hash.list[i].get_cost()<<std::endl;
     output<<std::endl;
     return output;
 }
