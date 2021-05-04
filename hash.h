@@ -14,6 +14,10 @@ class Hash{
         int hashify(Stock);
         void collision(Stock);
         void remove(Stock);
+        long long letter_to_num(char);
+        char num_to_letter(int);
+        int encrypt(Stock);
+        std::string decrypt(int);
         friend std::ostream& operator << (std::ostream& output, Hash hash);
         
 
