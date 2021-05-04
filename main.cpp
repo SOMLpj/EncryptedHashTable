@@ -17,7 +17,7 @@ int main(){
 
     Hash h;
     // TEST DECRYPTION HERE
-    int e = h.encrypt(s8);
+    int e = h.encrypt(s10);
     h.decrypt(e);
     
     //ADD STOCK OBJECTS HERE

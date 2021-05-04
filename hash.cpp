@@ -33,11 +33,12 @@ void Hash::collision(Stock stock){ //WILL PROBABLY USE CHAINING (LINKED LISTS) T
         if(list[pos] == empty_stock) 
             break;
     }
-    list[pos] = stock;
+
     std::string encrypted_name = std::to_string(e);
     std::cout<<"Adding "<< stock.get_buyer_name()<<std::endl;
     std::cout<<"Encrypting..."<<std::endl;
     stock.set_buyer_name(encrypted_name);
+    list[pos] = stock;
     std::cout<<"ADDED " << stock.get_buyer_name()<< " at index " << pos<< std::endl;
 
     
@@ -212,7 +213,7 @@ int Hash::encrypt(Stock s){
     
 }
 
-std::string Hash::decrypt(int val){
+std::string Hash::decrypt(long long val){
     Stock s;
     int private_key = v[0];
     std::string num = std::to_string(val);

@@ -4,8 +4,6 @@
 #include "stock.h"
 
 class Hash{
-    private:
-        
     public:
         Stock* list;
         int pos,size;
@@ -18,8 +16,7 @@ class Hash{
         long long letter_to_num(char);
         char num_to_letter(int);
         int encrypt(Stock);
-        std::string decrypt(int);
+        std::string decrypt(long long);
         friend std::ostream& operator << (std::ostream& output, Hash hash);
-
 };
 #endif
