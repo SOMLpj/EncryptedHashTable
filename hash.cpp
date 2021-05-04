@@ -210,7 +210,6 @@ int Hash::encrypt(Stock s){
         name_val += temp;
     }
     return std::abs(name_val);
-    
 }
 
 std::string Hash::decrypt(long long val){

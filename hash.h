@@ -4,9 +4,10 @@
 #include "stock.h"
 
 class Hash{
-    public:
+    private: 
         Stock* list;
         int pos,size;
+    public:
         Hash();
         void copy_over();
         void add(Stock);

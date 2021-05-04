@@ -3,8 +3,8 @@
 
 int main(){
     Stock place_holder("NULL","NULL", 0, 0, "NULL");
-    Stock s0("HUCKLEBERRY", "APPL",20, 300, "apple");
-    Stock s1("FINN","MSFT",22,180,"orange");
+    Stock s0("JOHN", "APPL",20, 300, "apple");
+    Stock s1("JOHN","MSFT",22,180,"orange");
     Stock s2("Huck","GOOGL",5,1800,"peanut");
     Stock s3("FRANKENSTEIN","CSCO",2,38,"cheese");
     Stock s4("SHACKLETON","JPM",9,97,"onions");
@@ -12,18 +12,18 @@ int main(){
     Stock s6("KING","AAWW",3,63, "avocado");
     Stock s7("PARKER","FBP",1,90, "security");
     Stock s8("WAYNE","AAA",2,633, "helloworld");
-    Stock s9("RUTH","BBB",10,6, "potatoes");
+    Stock s9("BBB","BBB",10,6, "potatoes");
     Stock s10("JACKSON","CCC",65,623,"timex");
 
     Hash h;
     // TEST DECRYPTION HERE
-    int e = h.encrypt(s10);
-    h.decrypt(e);
+    // int e = h.encrypt(s1);
+    // h.decrypt(e);
     
     //ADD STOCK OBJECTS HERE
-    h.add(s2);
+    h.add(s0);
     h.add(s1);
-    h.add(s3);
+    h.add(s2);
     h.add(s3);
     h.add(s4);
     h.add(s5);
